@@ -474,7 +474,7 @@ CONTENT.python = {
         why:'A single / in Python ALWAYS produces a float, even when it divides evenly. That trailing .0 catches people out.' },
       { t:'fill', q:'Turn the text "5" into a number so this adds up to 10.',
         code:'total = ___("5") + 5', answers:['int'], why:'int() converts a string of digits into a whole number.' },
-      { t:'code', task:'<b>Fix the bug.</b> <code>age</code> is text. Set <code>result</code> to age plus 5 <i>as a number</i>.',
+      { t:'code', task:'<b>Complete it.</b> <code>age</code> is text. Set <code>result</code> to age plus 5 <i>as a number</i>.',
         starter:'age = "20"\n# convert age to a number, then add 5\nresult = \n', harness:'print(result)', expected:'25',
         hint:'int(age) converts the string "20" into the number 20.',
         solution:'age = "20"\nresult = int(age) + 5' },
@@ -564,21 +564,30 @@ CONTENT.python = {
       { t:'mcq', q:'What does this print?', code:'age = 20\nif age >= 18:\n    print("adult")\nelse:\n    print("minor")\nprint("done")',
         opts:['adult','adult then done','minor then done','adult, minor, done'], a:1,
         why:'One branch runs, then execution continues past the if. "done" is unindented, so it always runs.' },
-      { t:'code', task:'Write <code>classify(n)</code> that returns the string "positive", "negative" or "zero".',
-        starter:'def classify(n):\n    # your code here\n    pass\n',
-        harness:'print(classify(5))\nprint(classify(-3))\nprint(classify(0))', expected:'positive\nnegative\nzero',
-        hint:'if n > 0: return "positive", then elif n < 0: return "negative", then else: return "zero".',
-        solution:'def classify(n):\n    if n > 0:\n        return "positive"\n    elif n < 0:\n        return "negative"\n    else:\n        return "zero"' },
-      { t:'code', task:'Write <code>is_even(n)</code> returning True if n is even, otherwise False.',
-        starter:'def is_even(n):\n    # your code here\n    pass\n',
-        harness:'print(is_even(4))\nprint(is_even(7))\nprint(is_even(0))', expected:'True\nFalse\nTrue',
-        hint:'n % 2 is the remainder. Even numbers leave 0, so: return n % 2 == 0',
-        solution:'def is_even(n):\n    return n % 2 == 0' },
-      { t:'code', task:'Write <code>grade(score)</code>: 90+ returns "A", 80+ "B", 70+ "C", anything lower "F".',
-        starter:'def grade(score):\n    # your code here\n    pass\n',
-        harness:'print(grade(95))\nprint(grade(83))\nprint(grade(71))\nprint(grade(50))', expected:'A\nB\nC\nF',
-        hint:'Highest threshold first, then work down with elif.',
-        solution:'def grade(score):\n    if score >= 90:\n        return "A"\n    elif score >= 80:\n        return "B"\n    elif score >= 70:\n        return "C"\n    else:\n        return "F"' }
+      { t:'code', task:'<code>n</code> is already set below. Print <code>positive</code>, <code>negative</code> or <code>zero</code> depending on its value.',
+        spec:'Write the whole if / elif / else yourself. Do not just print the answer — the point is that the same code would work for any value of <code>n</code>.',
+        starter:'n = -3\n\n# print "positive" if n is above 0\n# print "negative" if n is below 0\n# print "zero" if it is neither\n',
+        harness:'', expected:'negative',
+        hint:'if n > 0:  then  elif n < 0:  then  else:  — each with an indented print underneath. Remember the colons.',
+        solution:'n = -3\n\nif n > 0:\n    print("positive")\nelif n < 0:\n    print("negative")\nelse:\n    print("zero")' },
+      { t:'code', task:'Print <code>even</code> or <code>odd</code> for the value of <code>n</code>.',
+        spec:'This is what <code>%</code> from floor 3 is for. A number is even when dividing it by 2 leaves nothing over.',
+        starter:'n = 7\n\n# print "even" if n is even, otherwise print "odd"\n',
+        harness:'', expected:'odd',
+        hint:'if n % 2 == 0:  print("even")  else:  print("odd")',
+        solution:'n = 7\n\nif n % 2 == 0:\n    print("even")\nelse:\n    print("odd")' },
+      { t:'code', task:'Print the letter grade for <code>score</code>.',
+        spec:'90 or above is <b>A</b> · 80 or above is <b>B</b> · 70 or above is <b>C</b> · anything else is <b>F</b>.<br><br><b>Order matters here.</b> Put the 70 check first and every score above 70 comes out as a C.',
+        starter:'score = 83\n\n# print the letter grade\n',
+        harness:'', expected:'B',
+        hint:'Start with the highest threshold: if score >= 90: print("A"), then elif score >= 80:, then elif score >= 70:, then else:.',
+        solution:'score = 83\n\nif score >= 90:\n    print("A")\nelif score >= 80:\n    print("B")\nelif score >= 70:\n    print("C")\nelse:\n    print("F")' },
+      { t:'code', task:'Print <code>allowed</code> only if the person is 21 or over <b>and</b> has ID. Otherwise print <code>denied</code>.',
+        spec:'Both conditions must be true at once — that is what <code>and</code> is for.',
+        starter:'age = 19\nhas_id = True\n\n# print "allowed" or "denied"\n',
+        harness:'', expected:'denied',
+        hint:'if age >= 21 and has_id:  print("allowed")  else:  print("denied"). Note you can write "and has_id" on its own — it is already True or False, so it needs no comparison.',
+        solution:'age = 19\nhas_id = True\n\nif age >= 21 and has_id:\n    print("allowed")\nelse:\n    print("denied")' }
     ]},
 
   { title:'Loops: for & range', mon:'Repetition Hydra', emoji:'\u{1F409}',
@@ -616,20 +625,24 @@ CONTENT.python = {
       { t:'mcq', q:'What does <code>range(0, 10, 2)</code> produce?',
         opts:['0 through 10','0 2 4 6 8','2 4 6 8 10','0 2 4 6 8 10'], a:1,
         why:'Step 2, starting at 0, stopping before 10 — so 10 itself is excluded.' },
-      { t:'code', task:'Write <code>count_down(n)</code> that <b>prints</b> n down to 1, one per line.',
-        starter:'def count_down(n):\n    # your code here\n    pass\n', harness:'count_down(3)', expected:'3\n2\n1',
-        hint:'range(n, 0, -1) counts backwards: from n, stopping before 0, stepping by -1.',
-        solution:'def count_down(n):\n    for i in range(n, 0, -1):\n        print(i)' },
-      { t:'code', task:'Write <code>sum_list(nums)</code> returning the total of a list — <b>without</b> using sum().',
-        starter:'def sum_list(nums):\n    # your code here\n    pass\n',
-        harness:'print(sum_list([1, 2, 3, 4]))\nprint(sum_list([]))', expected:'10\n0',
-        hint:'The accumulator pattern: total = 0 before the loop, total += n inside, return total after.',
-        solution:'def sum_list(nums):\n    total = 0\n    for n in nums:\n        total += n\n    return total' },
-      { t:'code', task:'Write <code>times_table(n)</code> printing <code>n x 1 = ...</code> up to <code>n x 3 = ...</code>',
-        starter:'def times_table(n):\n    # your code here\n    pass\n', harness:'times_table(3)',
-        expected:'3 x 1 = 3\n3 x 2 = 6\n3 x 3 = 9',
-        hint:'Loop i over range(1, 4) and print an f-string: f"{n} x {i} = {n * i}"',
-        solution:'def times_table(n):\n    for i in range(1, 4):\n        print(f"{n} x {i} = {n * i}")' }
+      { t:'code', task:'Print the numbers from <code>n</code> down to 1, one per line.',
+        spec:'Counting <i>backwards</i> needs all three parts of range: where to start, where to stop, and a negative step.',
+        starter:'n = 3\n\n# print 3, then 2, then 1\n',
+        harness:'', expected:'3\n2\n1',
+        hint:'range(n, 0, -1) means: start at n, stop before 0, step by -1. Then print i inside the loop.',
+        solution:'n = 3\n\nfor i in range(n, 0, -1):\n    print(i)' },
+      { t:'code', task:'<b>The accumulator pattern.</b> Add up every number in <code>nums</code> without using <code>sum()</code>.',
+        spec:'<code>total</code> is already started at 0 for you. Add each number to it inside the loop — the test prints it afterwards.',
+        starter:'nums = [1, 2, 3, 4]\ntotal = 0\n\n# loop through nums, adding each one to total\n',
+        harness:'print(total)', expected:'10',
+        hint:'for n in nums:  then indented underneath,  total += n  — which is shorthand for total = total + n.',
+        solution:'nums = [1, 2, 3, 4]\ntotal = 0\n\nfor n in nums:\n    total += n' },
+      { t:'code', task:'Print the 3 times table, from <code>3 x 1 = 3</code> up to <code>3 x 3 = 9</code>.',
+        spec:'Three lines, using the loop counter in both the text and the maths.',
+        starter:'n = 3\n\n# print:  3 x 1 = 3\n#         3 x 2 = 6\n#         3 x 3 = 9\n',
+        harness:'', expected:'3 x 1 = 3\n3 x 2 = 6\n3 x 3 = 9',
+        hint:'Loop i over range(1, 4), then print an f-string from floor 4: f"{n} x {i} = {n * i}"',
+        solution:'n = 3\n\nfor i in range(1, 4):\n    print(f"{n} x {i} = {n * i}")' }
     ]},
 
   { title:'while & Breaking Out', mon:'Deadlock', emoji:'\u{1F512}',
@@ -658,24 +671,33 @@ CONTENT.python = {
         opts:['0 1 2','0 1 2 3','0 through 9','3'], a:0, why:'break leaves the loop the moment i hits 3, before that print runs.' },
       { t:'mcq', q:'What does this print?', code:'for i in range(5):\n    if i % 2 == 0:\n        continue\n    print(i)',
         opts:['0 2 4','1 3','0 1 2 3 4','nothing'], a:1, why:'continue skips the rest of the pass for even numbers.' },
-      { t:'code', task:'Write <code>count_down(n)</code> using a <b>while</b> loop this time.',
-        starter:'def count_down(n):\n    # use a while loop\n    pass\n', harness:'count_down(3)', expected:'3\n2\n1',
-        hint:'while n > 0: print(n) then n -= 1. Forget the n -= 1 and it loops forever.',
-        solution:'def count_down(n):\n    while n > 0:\n        print(n)\n        n -= 1' },
-      { t:'code', task:'Write <code>first_over(limit)</code>: start at 1, keep doubling, return the first value greater than limit.',
-        starter:'def first_over(limit):\n    # your code here\n    pass\n',
-        harness:'print(first_over(10))\nprint(first_over(100))', expected:'16\n128',
-        hint:'value = 1, then while value <= limit: value = value * 2. Return value after the loop.',
-        solution:'def first_over(limit):\n    value = 1\n    while value <= limit:\n        value = value * 2\n    return value' }
+      { t:'code', task:'Count down from <code>n</code> to 1 again — but with a <b>while</b> loop this time.',
+        spec:'Same output as the for-loop version on the last floor. The difference is that <i>you</i> have to change n yourself, or it never stops.',
+        starter:'n = 3\n\n# use a while loop to print 3, then 2, then 1\n',
+        harness:'', expected:'3\n2\n1',
+        hint:'while n > 0:  then indented:  print(n)  and  n -= 1. Leave out the n -= 1 and it runs forever — refresh the page if that happens, your progress is saved.',
+        solution:'n = 3\n\nwhile n > 0:\n    print(n)\n    n -= 1' },
+      { t:'code', task:'Start at 1 and keep doubling until the value is greater than <code>limit</code>.',
+        spec:'A genuine use for <code>while</code>: you do not know in advance how many doublings it takes. The test prints <code>value</code> when you are done.',
+        starter:'limit = 10\nvalue = 1\n\n# keep doubling value while it is still 10 or less\n',
+        harness:'print(value)', expected:'16',
+        hint:'while value <= limit:  then  value = value * 2. Trace it: 1, 2, 4, 8, 16 — and 16 is the first one above 10, so the loop stops.',
+        solution:'limit = 10\nvalue = 1\n\nwhile value <= limit:\n    value = value * 2' }
     ]},
 
   { title:'Functions', mon:'Null Returner', emoji:'\u{1F573}',
     taunt:'"I give back nothing. Just like your code."',
     lesson:[
       { h:'A function is a named, reusable set of steps',
-        p:['Define it once with <code>def</code>, then call it as often as you like.'],
-        code:'def greet():\n    print("Hello!")\n\ngreet()\ngreet()', out:'Hello!\nHello!',
-        note:'<b>Defining is not running.</b> The <code>def</code> block only teaches Python the recipe. Nothing happens until you <i>call</i> it.' },
+        key:'Everything you have written so far runs <b>once, top to bottom</b>. A function lets you name a block of code and run it <b>whenever you want, as many times as you want</b>.',
+        p:['Look at what you wrote on floor 5: an if/elif/else that worked out whether <code>n</code> was positive, negative or zero. It ran one time, for one value, and then it was gone.',
+           'To check a second number you would have to copy the whole thing and change the variable. A function fixes that — you write the logic once and hand it a different number each time.'],
+        code:'# floor 5: runs once, for one value\nn = -3\nif n > 0:\n    print("positive")\n\n# now: write it once, use it forever\ndef classify(n):\n    if n > 0:\n        return "positive"\n\nprint(classify(-3))\nprint(classify(7))\nprint(classify(0))',
+        note:'<b>Defining is not running.</b> The <code>def</code> block only teaches Python the recipe — nothing happens until you <i>call</i> it with <code>classify(7)</code>. That is why a file full of functions and no calls does nothing at all.' },
+      { h:'Reading the def line, piece by piece',
+        p:['Nothing here is assumed. Every symbol explained:'],
+        code:'def classify(n):\n│   │        │  └── the colon, same as if and for. The indented\n│   │        │      lines below belong to this function.\n│   │        └── the PARAMETER: an empty slot with a name.\n│   │            Inside the function, n means "whatever was\n│   │            handed in this time".\n│   └── the NAME you are giving this block of code.\n│       You choose it, same rules as a variable name.\n└── the keyword that says "a function starts here".\n\n\nclassify(-3)\n│        └── the ARGUMENT: the real value you are handing in.\n└── CALLING it. This is what actually makes it run.',
+        note:'<b>Parameter vs argument</b> trips people up and it is simple: the parameter is the empty slot in the definition, the argument is what you drop into it when you call. Slot and thing.' },
       { h:'Parameters: giving it information',
         p:['Names in the parentheses are <b>parameters</b> — empty slots. The real values you pass in are <b>arguments</b>.'],
         code:'def greet(name):\n    print("Hello, " + name)\n\ngreet("Taj")\ngreet("Ada")', out:'Hello, Taj\nHello, Ada' },
@@ -717,7 +739,13 @@ CONTENT.python = {
         starter:'def greet(name, greeting="Hi"):\n    # your code here\n    pass\n',
         harness:'print(greet("Sam"))\nprint(greet("Sam", "Yo"))', expected:'Hi, Sam\nYo, Sam',
         hint:'return f"{greeting}, {name}" — and make sure you return rather than print.',
-        solution:'def greet(name, greeting="Hi"):\n    return f"{greeting}, {name}"' }
+        solution:'def greet(name, greeting="Hi"):\n    return f"{greeting}, {name}"' },
+      { t:'code', task:'<b>Full circle.</b> Remember <code>classify</code> from floor 5? Turn it into a function that <b>returns</b> the word instead of printing it.',
+        spec:'Same logic you already wrote — now wrapped so it can be reused. Note the test calls it three times with three different values, which the floor 5 version could never do.',
+        starter:'def classify(n):\n    # the same if / elif / else from floor 5,\n    # but returning the word instead of printing it\n    pass\n',
+        harness:'print(classify(5))\nprint(classify(-3))\nprint(classify(0))', expected:'positive\nnegative\nzero',
+        hint:'if n > 0: return "positive" — then elif n < 0: return "negative" — then else: return "zero". Use return, not print: the test does the printing.',
+        solution:'def classify(n):\n    if n > 0:\n        return "positive"\n    elif n < 0:\n        return "negative"\n    else:\n        return "zero"' }
     ]},
 
   { title:'Lists', mon:'Off-By-One', emoji:'\u{1F41B}',
@@ -1428,16 +1456,18 @@ CONTENT.r = {
       { t:'code', task:'Create <code>scores</code> holding 80, 90 and 100, then nothing else.',
         starter:'scores <- \n', harness:'print(mean(scores))', expected:'[1] 90',
         hint:'scores <- c(80, 90, 100)', solution:'scores <- c(80, 90, 100)' },
-      { t:'code', task:'Write <code>double_all(v)</code> returning every element doubled. No loop.',
-        starter:'double_all <- function(v) {\n  # your code here\n}\n',
-        harness:'print(double_all(c(1, 2, 3)))', expected:'[1] 2 4 6',
-        hint:'Just return v * 2 — R applies it to every element.',
-        solution:'double_all <- function(v) {\n  v * 2\n}' },
-      { t:'code', task:'Write <code>high_scores(v)</code> returning only the values above 85.',
-        starter:'high_scores <- function(v) {\n  # use logical indexing\n}\n',
-        harness:'print(high_scores(c(88, 92, 79, 95)))', expected:'[1] 88 92 95',
-        hint:'v[v > 85] — the condition inside the brackets keeps only the TRUE positions.',
-        solution:'high_scores <- function(v) {\n  v[v > 85]\n}' }
+      { t:'code', task:'Print every element of <code>v</code> doubled — with no loop.',
+        spec:'This is the whole point of R. One operation, applied to the entire vector at once.',
+        starter:'v <- c(1, 2, 3)\n\n# print every element doubled\n',
+        harness:'', expected:'[1] 2 4 6',
+        hint:'print(v * 2) — that is genuinely all of it. R does the rest.',
+        solution:'v <- c(1, 2, 3)\n\nprint(v * 2)' },
+      { t:'code', task:'Print only the scores above 85.',
+        spec:'Put a condition inside the square brackets and R keeps only the positions where it is TRUE.',
+        starter:'scores <- c(88, 92, 79, 95)\n\n# print only the scores above 85\n',
+        harness:'', expected:'[1] 88 92 95',
+        hint:'print(scores[scores > 85]) — read it as "scores, where scores is greater than 85".',
+        solution:'scores <- c(88, 92, 79, 95)\n\nprint(scores[scores > 85])' }
     ]},
 
   { title:'Types & Coercion', mon:'The Flattener', emoji:'\u{1F9F2}',
@@ -1484,15 +1514,18 @@ CONTENT.r = {
       { t:'fill', q:'Convert the text "42" into a number.',
         code:'n <- ___("42")', answers:['as.numeric','as.integer'],
         why:'as.numeric() converts text to a number, giving NA if it cannot.' },
-      { t:'code', task:'Write <code>to_num(s)</code> converting text to a number and adding 8.',
-        starter:'to_num <- function(s) {\n  # your code here\n}\n',
-        harness:'print(to_num("42"))', expected:'[1] 50',
-        hint:'as.numeric(s) + 8', solution:'to_num <- function(s) {\n  as.numeric(s) + 8\n}' },
-      { t:'code', task:'Write <code>count_missing(v)</code> returning how many values are NA.',
-        starter:'count_missing <- function(v) {\n  # your code here\n}\n',
-        harness:'print(count_missing(c(1, NA, 3, NA)))\nprint(count_missing(c(1, 2)))', expected:'[1] 2\n[1] 0',
-        hint:'sum(is.na(v)) — is.na gives TRUE/FALSE and sum counts the TRUEs.',
-        solution:'count_missing <- function(v) {\n  sum(is.na(v))\n}' }
+      { t:'code', task:'<code>s</code> is text. Convert it to a number, add 8, and print the result.',
+        spec:'Adding 8 to the text "42" directly is an error. You have to convert first.',
+        starter:'s <- "42"\n\n# convert s to a number, add 8, print it\n',
+        harness:'', expected:'[1] 50',
+        hint:'print(as.numeric(s) + 8)',
+        solution:'s <- "42"\n\nprint(as.numeric(s) + 8)' },
+      { t:'code', task:'Print how many values in <code>v</code> are missing.',
+        spec:'Remember: you can never test for NA with <code>==</code>. And summing TRUE/FALSE counts the TRUEs, because TRUE is 1.',
+        starter:'v <- c(1, NA, 3, NA)\n\n# print how many values are NA\n',
+        harness:'', expected:'[1] 2',
+        hint:'print(sum(is.na(v))) — is.na(v) gives FALSE TRUE FALSE TRUE, and sum adds them up.',
+        solution:'v <- c(1, NA, 3, NA)\n\nprint(sum(is.na(v)))' }
     ]},
 
   { title:'Factors: Categorical Data', mon:'Level Shifter', emoji:'\u{1F3F7}️',
@@ -1533,22 +1566,23 @@ CONTENT.r = {
       { t:'fill', q:'Turn a character vector into categorical data.',
         code:'year <- ___(c("Fresh", "Senior"))', answers:['factor','as.factor'],
         why:'factor() creates categorical data with a fixed set of levels.' },
-      { t:'code', task:'Write <code>n_categories(v)</code> returning how many distinct categories a character vector has.',
-        starter:'n_categories <- function(v) {\n  # your code here\n}\n',
-        harness:'print(n_categories(c("low", "high", "low")))\nprint(n_categories(c("a", "b", "c")))', expected:'[1] 2\n[1] 3',
-        hint:'nlevels(factor(v)) — or length(levels(factor(v))).',
-        solution:'n_categories <- function(v) {\n  nlevels(factor(v))\n}' },
-      { t:'code', task:'Write <code>safe_numbers(f)</code> converting a factor of number-text into real numbers.',
-        starter:'safe_numbers <- function(f) {\n  # avoid the level-code trap\n}\n',
-        harness:'f <- factor(c("10", "20", "30"))\nprint(safe_numbers(f))', expected:'[1] 10 20 30',
-        hint:'as.numeric(as.character(f)) — the as.character step is what saves you.',
-        solution:'safe_numbers <- function(f) {\n  as.numeric(as.character(f))\n}' },
-      { t:'code', task:'Write <code>ordered_size(v)</code> returning a factor with levels ordered small, medium, large.',
-        starter:'ordered_size <- function(v) {\n  # your code here\n}\n',
-        harness:'print(levels(ordered_size(c("large", "small"))))',
-        expected:'[1] "small"  "medium" "large" ',
-        hint:'factor(v, levels = c("small", "medium", "large")). Note R pads the printed strings to equal width.',
-        solution:'ordered_size <- function(v) {\n  factor(v, levels = c("small", "medium", "large"))\n}' }
+      { t:'code', task:'Print how many <b>distinct categories</b> are in <code>v</code>.',
+        starter:'v <- c("low", "high", "low")\n\n# print the number of distinct categories\n',
+        harness:'', expected:'[1] 2',
+        hint:'Turn it into a factor first, then count the levels: print(nlevels(factor(v)))',
+        solution:'v <- c("low", "high", "low")\n\nprint(nlevels(factor(v)))' },
+      { t:'code', task:'<b>Avoid the trap.</b> <code>f</code> is a factor of number-text. Print the real numbers, not the level codes.',
+        spec:'<code>as.numeric(f)</code> on its own gives you 1 2 3 — the internal codes. This is the mistake that has produced published errors.',
+        starter:'f <- factor(c("10", "20", "30"))\n\n# print 10 20 30, not 1 2 3\n',
+        harness:'', expected:'[1] 10 20 30',
+        hint:'print(as.numeric(as.character(f))) — the as.character step is the whole fix.',
+        solution:'f <- factor(c("10", "20", "30"))\n\nprint(as.numeric(as.character(f)))' },
+      { t:'code', task:'Make <code>v</code> a factor whose levels are ordered small, medium, large — then print the levels.',
+        spec:'Left alone, R sorts levels alphabetically: large, medium, small. You have to state the order you want.',
+        starter:'v <- c("large", "small")\n\n# build the factor with the levels in the right order,\n# then print its levels\n',
+        harness:'', expected:'[1] "small"  "medium" "large" ',
+        hint:'size <- factor(v, levels = c("small", "medium", "large")) then print(levels(size)). R pads the printed strings to equal width, which is why there are extra spaces.',
+        solution:'v <- c("large", "small")\n\nsize <- factor(v, levels = c("small", "medium", "large"))\nprint(levels(size))' }
     ]},
 
   { title:'Data Frames', mon:'Ragged Table', emoji:'\u{1F5C3}️',
@@ -1596,15 +1630,17 @@ CONTENT.r = {
         harness:'print(nrow(students))\nprint(mean(students$score))', expected:'[1] 3\n[1] 90',
         hint:'Each column is a c(...) vector, and they must be the same length.',
         solution:'students <- data.frame(\n  name = c("Ada", "Taj", "Grace"),\n  score = c(80, 90, 100)\n)' },
-      { t:'code', task:'Write <code>add_curve(df)</code> adding 5 to every score and returning the data frame.',
-        starter:'add_curve <- function(df) {\n  # add 5 to df$score, then return df\n}\n',
-        harness:'d <- data.frame(score = c(80, 90))\nprint(add_curve(d)$score)', expected:'[1] 85 95',
-        hint:'df$score <- df$score + 5, then df on its own line to return it.',
-        solution:'add_curve <- function(df) {\n  df$score <- df$score + 5\n  df\n}' },
-      { t:'code', task:'Write <code>describe(df)</code> returning the number of rows.',
-        starter:'describe <- function(df) {\n  # your code here\n}\n',
-        harness:'print(describe(data.frame(a = c(1, 2, 3, 4))))', expected:'[1] 4',
-        hint:'nrow(df)', solution:'describe <- function(df) {\n  nrow(df)\n}' }
+      { t:'code', task:'Add 5 to every score in the data frame, then print the score column.',
+        spec:'Assigning to a column replaces it. Because the operation is vectorised, one line updates every row.',
+        starter:'students <- data.frame(score = c(80, 90))\n\n# add 5 to every score, then print students$score\n',
+        harness:'', expected:'[1] 85 95',
+        hint:'students$score <- students$score + 5   then   print(students$score)',
+        solution:'students <- data.frame(score = c(80, 90))\n\nstudents$score <- students$score + 5\nprint(students$score)' },
+      { t:'code', task:'Print how many rows the data frame has.',
+        starter:'students <- data.frame(a = c(1, 2, 3, 4))\n\n# print the number of rows\n',
+        harness:'', expected:'[1] 4',
+        hint:'print(nrow(students)) — nrow for rows, ncol for columns.',
+        solution:'students <- data.frame(a = c(1, 2, 3, 4))\n\nprint(nrow(students))' }
     ]},
 
   { title:'Subsetting & Filtering', mon:'Comma Eater', emoji:'\u{1F52A}',
@@ -1649,26 +1685,28 @@ CONTENT.r = {
       { t:'mcq', q:'What does <code>which(c(FALSE, TRUE, TRUE))</code> return?',
         opts:['[1] TRUE TRUE','[1] 2 3','[1] 2','[1] 1 2 3'], a:1,
         why:'which() converts TRUE/FALSE into the POSITIONS of the TRUEs.' },
-      { t:'code', task:'Write <code>top_students(df)</code> returning the <code>name</code> values where score is above 85.',
-        starter:'top_students <- function(df) {\n  # your code here\n}\n',
-        harness:'d <- data.frame(name = c("Ada","Taj","Grace"), score = c(88, 92, 79))\nprint(top_students(d))',
-        expected:'[1] "Ada" "Taj"',
-        hint:'df[df$score > 85, "name"] — note the comma.',
-        solution:'top_students <- function(df) {\n  df[df$score > 85, "name"]\n}' },
-      { t:'code', task:'Write <code>count_passing(df)</code> returning how many rows have score at least 85.',
-        starter:'count_passing <- function(df) {\n  # your code here\n}\n',
-        harness:'d <- data.frame(score = c(88, 92, 79))\nprint(count_passing(d))', expected:'[1] 2',
-        hint:'sum(df$score >= 85) — or nrow(df[df$score >= 85, ]).',
-        solution:'count_passing <- function(df) {\n  sum(df$score >= 85)\n}' },
-      { t:'code', task:'Write <code>best_score(df)</code> returning the single highest score.',
-        starter:'best_score <- function(df) {\n  # your code here\n}\n',
-        harness:'d <- data.frame(score = c(88, 92, 79))\nprint(best_score(d))', expected:'[1] 92',
-        hint:'max(df$score)', solution:'best_score <- function(df) {\n  max(df$score)\n}' },
-      { t:'code', task:'Write <code>sorted_scores(df)</code> returning the scores sorted highest first.',
-        starter:'sorted_scores <- function(df) {\n  # your code here\n}\n',
-        harness:'d <- data.frame(score = c(88, 92, 79))\nprint(sorted_scores(d))', expected:'[1] 92 88 79',
-        hint:'sort(df$score, decreasing = TRUE)',
-        solution:'sorted_scores <- function(df) {\n  sort(df$score, decreasing = TRUE)\n}' }
+      { t:'code', task:'Print the <code>name</code> of every student scoring above 85.',
+        spec:'<b>The comma is not optional.</b> <code>df[rows, columns]</code> — leave a side blank to mean "all of them".',
+        starter:'students <- data.frame(name = c("Ada", "Taj", "Grace"),\n                       score = c(88, 92, 79))\n\n# print the names of students scoring above 85\n',
+        harness:'', expected:'[1] "Ada" "Taj"',
+        hint:'print(students[students$score > 85, "name"]) — say it out loud: "students, where score is above 85, the name column".',
+        solution:'students <- data.frame(name = c("Ada", "Taj", "Grace"),\n                       score = c(88, 92, 79))\n\nprint(students[students$score > 85, "name"])' },
+      { t:'code', task:'Print how many students scored 85 or above.',
+        spec:'You do not need to filter first. Summing a TRUE/FALSE vector counts the TRUEs.',
+        starter:'students <- data.frame(score = c(88, 92, 79))\n\n# print how many scored 85 or above\n',
+        harness:'', expected:'[1] 2',
+        hint:'print(sum(students$score >= 85))',
+        solution:'students <- data.frame(score = c(88, 92, 79))\n\nprint(sum(students$score >= 85))' },
+      { t:'code', task:'Print the single highest score.',
+        starter:'students <- data.frame(score = c(88, 92, 79))\n\n# print the highest score\n',
+        harness:'', expected:'[1] 92',
+        hint:'print(max(students$score))',
+        solution:'students <- data.frame(score = c(88, 92, 79))\n\nprint(max(students$score))' },
+      { t:'code', task:'Print all the scores, sorted highest first.',
+        starter:'students <- data.frame(score = c(88, 92, 79))\n\n# print the scores, highest first\n',
+        harness:'', expected:'[1] 92 88 79',
+        hint:'print(sort(students$score, decreasing = TRUE)) — without that argument you get lowest first.',
+        solution:'students <- data.frame(score = c(88, 92, 79))\n\nprint(sort(students$score, decreasing = TRUE))' }
     ]},
 
   { title:'Functions & Control Flow', mon:'Loop Tempter', emoji:'\u{1F300}',
@@ -2196,7 +2234,7 @@ CONTENT.javascript = {
       { t:'code', task:'Create a constant <code>total</code> holding the sum of 17 and 25.',
         starter:'// store the sum in a constant named total\nconst total = \n', harness:'console.log(total);', expected:'42',
         hint:'const total = 17 + 25;', solution:'const total = 17 + 25;' },
-      { t:'code', task:'<b>Fix the bug.</b> <code>age</code> is a string. Set <code>result</code> to age plus 5 <i>as a number</i>.',
+      { t:'code', task:'<b>Complete it.</b> <code>age</code> is a string. Set <code>result</code> to age plus 5 <i>as a number</i>.',
         starter:'const age = "20";\n// convert age to a number, then add 5\nconst result = \n', harness:'console.log(result);', expected:'25',
         hint:'Number("20") converts a string into a number.',
         solution:'const age = "20";\nconst result = Number(age) + 5;' }
@@ -2237,22 +2275,29 @@ CONTENT.javascript = {
         why:'?? only falls back on null or undefined, so 0 survives.' },
       { t:'mcq', q:'What is <code>!(true &amp;&amp; false)</code>?', opts:['true','false','undefined','Error'], a:0,
         why:'true && false is false; ! flips it.' },
-      { t:'code', task:'Write <code>classify(n)</code> returning "positive", "negative" or "zero".',
-        starter:'function classify(n) {\n  // your code here\n}\n',
-        harness:'console.log(classify(5));\nconsole.log(classify(-3));\nconsole.log(classify(0));',
-        expected:'positive\nnegative\nzero',
-        hint:'if (n > 0) return "positive"; else if (n < 0) ... else ...',
-        solution:'function classify(n) {\n  if (n > 0) return "positive";\n  else if (n < 0) return "negative";\n  else return "zero";\n}' },
-      { t:'code', task:'Write <code>isEven(n)</code> returning true or false.',
-        starter:'function isEven(n) {\n  // your code here\n}\n',
-        harness:'console.log(isEven(4));\nconsole.log(isEven(7));\nconsole.log(isEven(0));', expected:'true\nfalse\ntrue',
-        hint:'n % 2 is the remainder; even numbers give 0.',
-        solution:'function isEven(n) {\n  return n % 2 === 0;\n}' },
-      { t:'code', task:'Write <code>label(n)</code> using a ternary: "big" when above 100, otherwise "small".',
-        starter:'function label(n) {\n  // use a ternary\n}\n',
-        harness:'console.log(label(500));\nconsole.log(label(5));', expected:'big\nsmall',
-        hint:'return n > 100 ? "big" : "small";',
-        solution:'function label(n) {\n  return n > 100 ? "big" : "small";\n}' }
+      { t:'code', task:'<code>n</code> is already set. Log <code>positive</code>, <code>negative</code> or <code>zero</code>.',
+        spec:'Write the whole if / else if / else yourself — the same code should work for any value of <code>n</code>.',
+        starter:'const n = -3;\n\n// log "positive" if n is above 0\n// log "negative" if n is below 0\n// log "zero" if it is neither\n',
+        harness:'', expected:'negative',
+        hint:'if (n > 0) { ... } else if (n < 0) { ... } else { ... } — parentheses round the condition, braces round the block.',
+        solution:'const n = -3;\n\nif (n > 0) {\n  console.log("positive");\n} else if (n < 0) {\n  console.log("negative");\n} else {\n  console.log("zero");\n}' },
+      { t:'code', task:'Log <code>even</code> or <code>odd</code> for <code>n</code>.',
+        starter:'const n = 7;\n\n// log "even" if n is even, otherwise "odd"\n',
+        harness:'', expected:'odd',
+        hint:'n % 2 is the remainder. if (n % 2 === 0) { ... } else { ... } — three equals signs, always.',
+        solution:'const n = 7;\n\nif (n % 2 === 0) {\n  console.log("even");\n} else {\n  console.log("odd");\n}' },
+      { t:'code', task:'Log the letter grade for <code>score</code>.',
+        spec:'90+ is <b>A</b> · 80+ is <b>B</b> · 70+ is <b>C</b> · anything else is <b>F</b>. Order matters — put 70 first and everything above it becomes a C.',
+        starter:'const score = 83;\n\n// log the letter grade\n',
+        harness:'', expected:'B',
+        hint:'Highest threshold first: if (score >= 90) ... else if (score >= 80) ... and so on down to else.',
+        solution:'const score = 83;\n\nif (score >= 90) {\n  console.log("A");\n} else if (score >= 80) {\n  console.log("B");\n} else if (score >= 70) {\n  console.log("C");\n} else {\n  console.log("F");\n}' },
+      { t:'code', task:'Use a <b>ternary</b> to log "big" when <code>n</code> is above 100, otherwise "small".',
+        spec:'A ternary is a one-line if/else: <code>condition ? valueIfTrue : valueIfFalse</code>.',
+        starter:'const n = 5;\n\n// use a ternary, not a full if/else\n',
+        harness:'', expected:'small',
+        hint:'console.log(n > 100 ? "big" : "small");',
+        solution:'const n = 5;\n\nconsole.log(n > 100 ? "big" : "small");' }
     ]},
 
   { title:'Loops', mon:'Iteration Wyrm', emoji:'\u{1F41B}',
@@ -2282,20 +2327,23 @@ CONTENT.javascript = {
       { t:'mcq', q:'What does <code>for (const k in ["a","b"])</code> give you as k?',
         opts:['"a" then "b"','0 then 1 (as strings)','undefined','An error'], a:1,
         why:'for...in yields KEYS, which for an array are index strings. Use for...of for values.' },
-      { t:'code', task:'Write <code>countDown(n)</code> logging n down to 1, one per line.',
-        starter:'function countDown(n) {\n  // your code here\n}\n', harness:'countDown(3);', expected:'3\n2\n1',
-        hint:'for (let i = n; i > 0; i--) { console.log(i); }',
-        solution:'function countDown(n) {\n  for (let i = n; i > 0; i--) {\n    console.log(i);\n  }\n}' },
-      { t:'code', task:'Write <code>sumList(nums)</code> returning the total — no .reduce() yet.',
-        starter:'function sumList(nums) {\n  // your code here\n}\n',
-        harness:'console.log(sumList([1, 2, 3, 4]));\nconsole.log(sumList([]));', expected:'10\n0',
-        hint:'let total = 0 before the loop, add inside, return after.',
-        solution:'function sumList(nums) {\n  let total = 0;\n  for (const n of nums) {\n    total += n;\n  }\n  return total;\n}' },
-      { t:'code', task:'Write <code>fizz(n)</code> logging 1..n but "Fizz" for multiples of 3.',
-        starter:'function fizz(n) {\n  // your code here\n}\n', harness:'fizz(6);',
-        expected:'1\n2\nFizz\n4\n5\nFizz',
-        hint:'Loop 1 to n, and if (i % 3 === 0) log "Fizz" else log i.',
-        solution:'function fizz(n) {\n  for (let i = 1; i <= n; i++) {\n    if (i % 3 === 0) console.log("Fizz");\n    else console.log(i);\n  }\n}' }
+      { t:'code', task:'Log the numbers from <code>n</code> down to 1, one per line.',
+        spec:'Counting backwards means starting at n, continuing while it is above 0, and stepping <i>down</i> each time.',
+        starter:'const n = 3;\n\n// log 3, then 2, then 1\n',
+        harness:'', expected:'3\n2\n1',
+        hint:'for (let i = n; i > 0; i--) { console.log(i); } — note i-- instead of i++.',
+        solution:'const n = 3;\n\nfor (let i = n; i > 0; i--) {\n  console.log(i);\n}' },
+      { t:'code', task:'<b>The accumulator pattern.</b> Add up every number in <code>nums</code>.',
+        spec:'<code>total</code> is started at 0 for you. Add each number to it in the loop — the test logs it afterwards.',
+        starter:'const nums = [1, 2, 3, 4];\nlet total = 0;\n\n// loop through nums, adding each to total\n',
+        harness:'console.log(total);', expected:'10',
+        hint:'for (const n of nums) { total += n; } — note total is declared with let, because it changes.',
+        solution:'const nums = [1, 2, 3, 4];\nlet total = 0;\n\nfor (const n of nums) {\n  total += n;\n}' },
+      { t:'code', task:'Log 1 to 6, but log <code>Fizz</code> instead for any multiple of 3.',
+        starter:'// log 1, 2, Fizz, 4, 5, Fizz\n',
+        harness:'', expected:'1\n2\nFizz\n4\n5\nFizz',
+        hint:'Loop i from 1 to 6. Inside: if (i % 3 === 0) log "Fizz", else log i.',
+        solution:'for (let i = 1; i <= 6; i++) {\n  if (i % 3 === 0) {\n    console.log("Fizz");\n  } else {\n    console.log(i);\n  }\n}' }
     ]},
 
   { title:'Functions', mon:'Undefined Revenant', emoji:'\u{1F573}',
@@ -7824,28 +7872,60 @@ function buildDeck(opts){
       const where=C.name+' · Floor '+(zi+1)+' · '+z.title;
       (z.lesson||[]).forEach((p,pi)=>{
         if(!p.note) return;
+        /* Most notes are written as "<b>The one-line rule.</b> rest of the explanation."
+           Use that structure for a real cloze card: show the explanation, hide the rule,
+           ask the player to state the rule before revealing. Notes that don't fit the
+           pattern fall back to the old generic prompt rather than breaking. */
+        const m=/^\s*<b>([^<]+?)<\/b>\s*([\s\S]*)$/.exec(p.note||'');
+        const front = (m && m[2].trim())
+          ? '<h2>'+p.h+'</h2><div class="note" style="opacity:.8">'+m[2]+'</div>'+
+            '<p class="sub">What\'s the one-line rule this is teaching? Say it before revealing.</p>'
+          : '<h2>'+p.h+'</h2><p class="sub">What is the key thing to remember here? Say it out loud before revealing.</p>';
         cards.push({ id:lang+'|n|'+zi+'|'+pi, where, tag:'concept',
-          front:'<h2>'+p.h+'</h2><p class="sub">What is the key thing to remember here? Say it out loud before revealing.</p>',
-          back:'<div class="note">'+p.note+'</div>' });
+          front, back:'<div class="note">'+p.note+'</div>' });
       });
       z.encounters.forEach((e,ei)=>{
         if(e.t==='mcq'){
-          cards.push({ id:lang+'|q|'+zi+'|'+ei, where, tag:'recall',
-            front:'<h2>'+e.q+'</h2>'+(e.code?'<pre><code>'+esc(e.code)+'</code></pre>':'')+
-                  '<p class="sub">No options. Answer from memory.</p>',
-            back:'<p class="ok" style="font-size:17px"><b>'+e.opts[e.a]+'</b></p><p class="sub">'+e.why+'</p>' });
+          /* "Which of these..." questions ARE the options — the candidates are the substance
+             of the question, not just answer choices to something self-contained. Stripping
+             them (like we do for "what does this print?") leaves nothing to answer. Show them,
+             shuffled, without marking which is correct. */
+          const bareQ=String(e.q).replace(/<[^>]*>/g,'');
+          const isWhich=/^\s*which\b/i.test(bareQ);
+          if(isWhich){
+            const order=shuffle(e.opts.map((_,i)=>i));
+            cards.push({ id:lang+'|q|'+zi+'|'+ei, where, tag:'recall',
+              front:'<h2>'+e.q+'</h2>'+(e.code?'<pre><code>'+esc(e.code)+'</code></pre>':'')+
+                    '<ol class="sub" style="padding-left:20px;margin:8px 0">'+order.map(i=>'<li>'+e.opts[i]+'</li>').join('')+'</ol>'+
+                    '<p class="sub">Pick the one that fits, then reveal to check.</p>',
+              back:'<p class="ok" style="font-size:17px"><b>'+e.opts[e.a]+'</b></p><p class="sub">'+e.why+'</p>' });
+          } else {
+            cards.push({ id:lang+'|q|'+zi+'|'+ei, where, tag:'recall',
+              front:'<h2>'+e.q+'</h2>'+(e.code?'<pre><code>'+esc(e.code)+'</code></pre>':'')+
+                    '<p class="sub">No options. Answer from memory.</p>',
+              back:'<p class="ok" style="font-size:17px"><b>'+e.opts[e.a]+'</b></p><p class="sub">'+e.why+'</p>' });
+          }
         } else if(e.t==='fill'){
           cards.push({ id:lang+'|f|'+zi+'|'+ei, where, tag:'recall',
             blank:true, code:e.code, answers:e.answers,
             front:'<h2>'+e.q+'</h2>',
             back:'<p class="ok" style="font-size:17px"><b>'+esc(e.answers[0])+'</b></p><p class="sub">'+e.why+'</p>' });
         } else if((e.t==='code'||e.t==='sql')&&e.solution){
+          /* "Fix"/"Complete" tasks hand you real starting code — a fresh blank box under
+             "write this from memory" asks you to reproduce boilerplate that was never the
+             point, and mislabels the exercise. Preload the actual starter, same as the
+             floor itself does, and word the prompt to match what's actually being asked. */
+          const bareTask=String(e.task).replace(/<[^>]*>/g,'');
+          const isFix=/\bfix\b/i.test(bareTask);
+          const starter=e.starter||'';
           cards.push({ id:lang+'|c|'+zi+'|'+ei, where, tag:'write it',
-            write:true, lang, isSQL:(e.t==='sql'||lang==='sql'),
+            write:true, lang, isSQL:(e.t==='sql'||lang==='sql'), starter,
             harness:e.harness||'', expected:e.expected, ordered:e.ordered, match:e.match,
-            front:'<h2>Write this from memory</h2><p>'+e.task+'</p>'+
+            front:'<h2>'+(isFix?'Fix it from memory':(starter.trim()?'Complete it from memory':'Write this from memory'))+'</h2><p>'+e.task+'</p>'+
                   (e.spec?'<div class="note">'+e.spec+'</div>':'')+
-                  '<p class="sub">Write it in the box, then run it. Recognising a solution is not the same as being able to produce one.</p>',
+                  '<p class="sub">'+(starter.trim()?'The starting code is loaded below. ':'')+
+                  (isFix?'Fix it, then run.':(starter.trim()?'Complete it, then run.':'Write it, then run.'))+
+                  ' Recognising a solution is not the same as being able to produce one.</p>',
             back:'<pre><code>'+esc(e.solution)+'</code></pre>' });
         } else if(e.t==='do'&&e.cmds&&e.cmds.length){
           const pick=e.cmds[0];
@@ -7961,6 +8041,7 @@ function renderCards(v){
   if(c.write){
     ta=el('textarea'); ta.spellcheck=false; ta.style.minHeight='170px';
     ta.placeholder = c.isSQL ? 'SELECT ...' : 'write it from memory, then Run & check';
+    if(c.starter && c.starter.trim()) ta.value=c.starter;
     ta.addEventListener('keydown',ev=>{
       if(ev.key==='Tab'){ ev.preventDefault();
         const p=ta.selectionStart, ind=c.isSQL?'  ':((CONTENT[c.lang]&&CONTENT[c.lang].indent)||'  ');
